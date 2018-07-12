@@ -1,0 +1,29 @@
+<!--뭔가를 만들 때는 웬만하면 container div안에 넣어주자.(보기에 예쁨)-->
+<div class="container">
+    <!--form안의 내용을 어디로 보낼지, 어떤 방식으로 보낼지를 action, method로 정한다.-->
+    <!--action에서 post앞에 '/'가 있으면 루트 주소부터 바뀐다. 앞에 '/'안붙이면 현재 주소 뒤에 이어 붙임-->
+    <!--사진을 넣을 때는 method를 post로 보내야만 전송된다. 링크 이동 정도만 get으로 쓰자-->
+    <!--form을 통해 어디로 데이터를 전송할지 정하면 바로 routes로 가서 라우터를 지정해주자.-->
+    <!--enctype은 이미지 파일을 보내기 위해 추가-->
+    <form action="/video_board/create" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">제목</label>
+        <!--type에 email을 넣으면 email 형식만 입력받는다.-->
+        <input name="input_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">URL</label>
+        <!--rows는 처음 창의 크기를 결정한다.-->
+        <input name="input_content" type="text" class="form-control" id="exampleFormControlInput1"  placeholder="video url을 입력하세요">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">URL</label>
+        <!--rows는 처음 창의 크기를 결정한다.-->
+        <input name="input_hash" type="text" class="form-control" id="exampleFormControlInput1"  placeholder="hash를 입력하세요">
+      </div>
+
+      <!--form안에 버튼이 있어야 form에서 입력받은 데이터를 보낸다.-->
+      <!--type을 button이 아니라 submit이라고 해야 데이터를 보낸다.-->
+      <button type="submit" class="btn btn-dark">작성</button>
+    </form>
+</div>

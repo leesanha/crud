@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    
+    <!--로그인 상태일 때와 로그아웃 상태일 때를 조건문을 통해 나눔-->
+    <% if user_signed_in? %>
+        <div><%= current_user.username %></div>
+        <!--내 웹서버의 모든 routes를 보려면 rake routes를 bash창에 쓰면 된다.-->
+        <a href="/users/sign_out">로그아웃</a>
+    <% else %>
+        <a href="/users/sign_in">로그인</a>
+    <% end %>
+    
+    <form action="/post/search" method="get" class="form-inline my-2 my-lg-0">
+      <div class="form-group">
+        <select name="category" class="form-control" id="exampleFormControlSelect1">
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+          <option value="titleContent">제목+내용</option>
+          <option value="user">작성자</option>
+        </select>
+      </div>
+      <input name="q" class="form-control mr-sm-2" type="search" placeholder="검색할 내용" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+    </form>
+  </div>
+</nav>

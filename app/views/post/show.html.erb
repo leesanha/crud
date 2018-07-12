@@ -1,0 +1,94 @@
+<div class="container">
+    <!--<hr />은 줄을 그어줌-->
+    <h1><%= @post.title %></h1><hr />
+    <!--이 div안에 있는 건 다 오른쪽으로 옮긴다.-->
+    <div style="text-align:right;">
+        <!--config 폴더에 application에서 timezone을 Seoul로 바꾸고 +0900을 없앤다.-->
+        <!--자료형이 datetime이기 때문에 string으로 바꾼다. 이후에 +를 기준으로 나눈다. 앞에껄 쓴다. secend나 last로 써도 된다.-->
+        <!--뒤에 꺼는 몇 분전에 작성된 글인지 보여준다.-->
+        <div><%= @post.created_at.to_s.split("+").first %>, <%= time_ago_in_words(@post.created_at)%> ago</div>
+        <div><%= @post.user.username %></div>
+        <!--어디로 보낼지 결정했으니까 routes로 가서 설정한다.-->
+        <a href="/post/edit/<%= @post.id %>">
+            <span class="badge badge-info">수정</span>
+        </a>
+        <a href="/post/destroy/<%= @post.id %>">
+            <span class="badge badge-info">삭제</span>
+        </a>
+        
+        <!--size 말고 count라 써도됨-->
+        <div><%= @post.liked_users.size%>명이 좋아합니다.</div>
+        <% if current_user.is_like?(@post) %>
+            <div>
+                <!--<a href="/likes/likes_toggle/<%#= @post.id %>"><span> 좋아요 취소 </span></a>-->
+                <%= link_to "좋아요 취소", likes_likes_toggle_path(@post), method: "post" %>
+            </div>
+        <% else %>
+            <div>
+                <!--<a href="/likes/likes_toggle/<%#= @post.id %>"><span> 좋아요 </span></a>-->
+                <%= link_to "좋아요", likes_likes_toggle_path(@post), :method => "post" %>
+            </div>
+        <% end %>
+    </div>
+    <!--엔터를 인식시키는 함수-->
+    <p><%= simple_format(@post.content) %></p>
+    
+    <!--사진을 가져오는 태그를 사용하자. 앞에 image_tag를 적고, 뒤에 image파일의 주소를 주는 것.-->
+    
+    <!--이미지 파일이 nil이 아니면 이미지 파일을 띄워준다.-->
+    <% unless @post.image.nil? %>
+        <%= image_tag @post.image %>
+        <%= image_tag @post.thumb %>
+        <%= image_tag @post.middle %>
+    <% end %>
+    <hr />
+    <!--하나의 post에 달려 있는 reply들을 다 가져 온다.-->
+    <div>
+        <% @post.replies.each do |r| %>
+            <%= r.user.username %>: <%= r.content %>
+            <a href="/reply/destroy/<%= r.id %>">
+                <span class="badge badge-danger">삭제</span>
+            </a><br>
+        <% end %>
+    </div>
+    
+    <form action="/reply/create" method="post">
+        <!--해당 글의 id를 보내는 데 유저에게 안보이게 보낸다. 이름은 post_id로 해서 보낸다.-->
+        <input name="post_id" value="<%= @post.id %>" hidden="true">
+        <div class="row">
+            <!--rows는 처음 창의 크기를 결정한다.-->
+            <textarea name="content" class="form-control col-11" id="exampleFormControlTextarea1" rows="3" placeholder="내용을 입력하세요"></textarea>
+            <!--전달할 내용이니까 form안에 버튼을 넣어준다. 데이터를 보내려면 type은 submit-->
+            <button type="submit" class="btn btn-dark col-1">댓글쓰기</button>
+        </div>
+    </form>
+    <div style="text-align:right;">
+        <a href="/post/index">
+            <span class="badge badge-dark">목록</span>
+        </a>
+    </div>
+    
+    <div>
+        <table class="table table-borderless" margin-left="auto">
+          <tbody>
+            <tr>
+              <td>이전글</td></td>
+              <% if @predecessor == -1 %>
+                  <td>이전 글이 없습니다.</td>
+              <% else %>
+                  <td><a href="/post/show/<%= @predecessor_post_id %>"><%= @predecessor_post_title %></a></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>다음글</td>
+              <% if @successor == -1 %>
+              
+                  <td>다음 글이 없습니다.</td>
+              <% else %>
+                  <td><a href="/post/show/<%= @successor_post_id %>"><%= @successor_post_title %></a></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>

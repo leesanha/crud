@@ -1,0 +1,53 @@
+<div class="container">
+    <!--<hr />은 줄을 그어줌-->
+    <h1><%= @video.title %></h1><hr />
+    <!--이 div안에 있는 건 다 오른쪽으로 옮긴다.-->
+    <div style="text-align:right;">
+        <!--config 폴더에 application에서 timezone을 Seoul로 바꾸고 +0900을 없앤다.-->
+        <!--자료형이 datetime이기 때문에 string으로 바꾼다. 이후에 +를 기준으로 나눈다. 앞에껄 쓴다. secend나 last로 써도 된다.-->
+        <!--뒤에 꺼는 몇 분전에 작성된 글인지 보여준다.-->
+        <div><%= @video.created_at.to_s.split("+").first %>, <%= time_ago_in_words(@video.created_at)%> ago</div>
+        <div>사용자</div>
+        <!--어디로 보낼지 결정했으니까 routes로 가서 설정한다.-->
+        <a href="/video_board/edit/<%= @video.id %>">
+            <span class="badge badge-info">수정</span>
+        </a>
+        <a href="/video_board/destroy/<%= @video.id %>">
+            <span class="badge badge-info">삭제</span>
+        </a>
+    </div>
+    <div>
+        <iframe width="854" height="480" src="<%= @video.video %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <hr />
+    
+    <div style="text-align:right;">
+        <a href="/video_board/index">
+            <span class="badge badge-dark">목록</span>
+        </a>
+    </div>
+    
+    <div>
+        <table class="table table-borderless" margin-left="auto">
+          <tbody>
+            <tr>
+              <td>이전글</td></td>
+              <% if @predecessor == -1 %>
+                  <td>이전 글이 없습니다.</td>
+              <% else %>
+                  <td><a href="/video_board/show/<%= @predecessor_post_id %>"><%= @predecessor_post_title %></a></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>다음글</td>
+              <% if @successor == -1 %>
+              
+                  <td>다음 글이 없습니다.</td>
+              <% else %>
+                  <td><a href="/video_board/show/<%= @successor_post_id %>"><%= @successor_post_title %></a></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>

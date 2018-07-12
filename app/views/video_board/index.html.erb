@@ -1,0 +1,30 @@
+<div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">작성 시간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @video.each do |p| %>
+            <tr>
+              <th scope="row"><%= p.id %></th>
+              <!--href에 /post/show로 하면 어떤 글을 읽어 올지 id를 알 수 없다.-->
+              <!--URL에 id를 보내니까 routes를 설정해줘야 한다.-->
+              <!--주소창으로 id값을 보내는 것 보다 form 태그를 통해서 전달하고 hidden으로 숨기는게 보안에 더 좋다.-->
+                <td><a href="/video_board/show/<%= p.id %>"><%= p.title %></a></td>
+              <td>작성자</td>
+              <td><%= p.created_at %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <!--이 버튼은 데이터를 전송하는 게 아니니까 type을 그냥 button으로 두면 됨.-->
+    <!--default가 get방식이니까 해당 html을 받아올 것-->
+    <a href="/video_board/new">
+        <button type="button" class="btn btn-dark">글쓰기</button>
+    </a>
+</div>
