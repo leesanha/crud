@@ -6,5 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(username: "lsh", email: "a@a.a", password: "123456")
-Post.create(title: "안녕하세요", content: "반갑습니다.", user_id: 1)
+(1..3).each do |i|
+  User.create(username: i, email: "#{i}@#{i}.com", password: "123456", password_confirmation: "123456")
+  (1..3).each do |j|
+    Post.create(title: "#{i}가 #{j}번째 글을 작성", content: "#{i}가 쓴 #{j}번 째 글", user_id: i)
+  end
+end

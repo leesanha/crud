@@ -38,8 +38,8 @@
     <!--이미지 파일이 nil이 아니면 이미지 파일을 띄워준다.-->
     <% unless @post.image.nil? %>
         <%= image_tag @post.image %>
-        <%= image_tag @post.thumb %>
-        <%= image_tag @post.middle %>
+        <%#= image_tag @post.thumb %>
+        <%#= image_tag @post.middle %>
     <% end %>
     <hr />
     <!--하나의 post에 달려 있는 reply들을 다 가져 온다.-->
