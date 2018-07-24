@@ -105,4 +105,16 @@ class PostController < ApplicationController
       @post = User.where("username LIKE ?", "%#{params[:q]}%").take.posts
     end
   end
+  
+  def ajaxCall
+    count = params[:count].to_i
+    @item = Post.all.at(count)
+    @return_value = {
+      "id" => @item.id, 
+      "username" => @item.user_id, 
+      "title" => @item.title, 
+      "time" => @item.created_at
+    }
+    render json: @return_value
+  end
 end

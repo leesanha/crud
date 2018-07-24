@@ -33,3 +33,95 @@
         <button type="button" class="btn btn-dark">글쓰기</button>
     </a>
 </div>
+
+
+
+<!--<button onclick="hi_1()">hi</button>-->
+<!--<button onclick="hi_2('hi', 'hi')">hi</button>-->
+<!--<br></br>-->
+<!------------------------------------------------------------>
+<!--<input id="idv_1"></input>-->
+<!--<button onclick="add_1()">+</button>-->
+<!--<input id="idv_2"></input>-->
+<!--=-->
+<!--<input id="idr_1"></input>-->
+<!--<br></br>-->
+<!------------------------------------------------------------>
+<!--<span>1</span>-->
+<!--<button onclick="add_2(<%#= 1 %>, <%#= 2 %>)">+</button>-->
+<!--<span>2</span>-->
+<!--=-->
+<!--<input id="idr_2"></input>-->
+<!--<br></br>-->
+<!------------------------------------------------------------>
+<!--<div class="container">-->
+<!--  <%# @posts.each do |p| %>-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--      <img class="card-img-top" src="https://static1.squarespace.com/static/583c906ebe659429d1106265/t/5935941859cc687293cd3f6b/1496683572683/" alt="Card image cap">-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title"><a href="/post/show/<%#= p.id %>"><%#= p.title %></a></h5>-->
+<!--        <p class="card-text"><%#= p.id %></p>-->
+<!--        <a href="#" class="btn btn-primary"><%#= p.user.username %></a>-->
+<!--        <div><%#= p.created_at %></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  <%# end %>-->
+<!--</div>-->
+
+<!--<div id="enters"></div>-->
+<!------------------------------------------------------------>
+<!--<script-->
+<!--  src="https://code.jquery.com/jquery-3.3.1.js"-->
+<!--  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
+<!--  crossorigin="anonymous"></script>-->
+<!------------------------------------------------------------>
+<!--<script>-->
+<!--  function hi_1(){-->
+<!--    var A = 1;-->
+<!--    var B = "hello"-->
+<!--    alert(A + B)-->
+<!--  }-->
+  
+<!--  function hi_2(_value, _value2){-->
+<!--    alert(_value + "HI!" + _value2);-->
+<!--  }-->
+  
+<!--  function add_1(){-->
+<!--    var A = Number(document.getElementById("idv_1").value)-->
+<!--    var B = Number(document.getElementById("idv_2").value)-->
+    
+<!--    var C = A+B-->
+<!--    document.getElementById("idr_1").value = C;-->
+<!--  }-->
+  
+<!--  function add_2(_value1, _value2){-->
+<!--    document.getElementById("idr_2").value = _value1 + _value2-->
+<!--  }-->
+<!---------------------------------------------------------------------------- -->
+<!--  var count = 4;-->
+<!--  var stringTemp = ""-->
+  
+<!--  function call(){-->
+<!--    $.ajax({-->
+<!--        type:"get",-->
+<!--        url:"/post/ajaxCall",-->
+<!--        data : {'count' : count},-->
+<!--        dataType : "json",-->
+<!--        success: function(data){-->
+<!--            alert(data[title]);-->
+<!--        },-->
+<!--        error: function(error) {-->
+<!--            alert("#");-->
+<!--        }  -->
+<!--    });-->
+<!--  }-->
+  
+<!--  var page = 1;-->
+
+<!--  $(window).scroll(function() {-->
+<!--      if ($(document).height() > $(window).height()) {-->
+<!--         $("#enters").append("<h1>Page</h1>" + page );-->
+<!--        call();-->
+<!--      }-->
+<!--  });-->
+<!--</script>-->
