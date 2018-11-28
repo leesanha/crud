@@ -5,16 +5,30 @@
     <!--사진을 넣을 때는 method를 post로 보내야만 전송된다. 링크 이동 정도만 get으로 쓰자-->
     <!--form을 통해 어디로 데이터를 전송할지 정하면 바로 routes로 가서 라우터를 지정해주자.-->
     <!--enctype은 이미지 파일을 보내기 위해 추가-->
+    <%#= form_for @post, method: :post, url: {action: "create"}, html: { multipart: true } do |f| %>
+      <%#= f.text_field :title %>
+      <%#= f.text_area :content, class: "form-control", placeholder: '내용입력' %>
+      <%#= f.file_field :images, multiple: true %>
+      <%#= f.submit "작성" %>
+    <%# end %>
+    <%#= form_tag '/post/create', method: 'post', multipart: true do %> 
+      <%#= text_field_tag 'input_title' %> 
+      <%#= text_field_tag 'input_content' %>
+      <%#= file_field_tag 'image' %>
+      <%#= submit_tag '글쓰기' %> 
+    <%# end %>
+
+    
     <form action="/post/create" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="exampleFormControlInput1">제목</label>
         <!--type에 email을 넣으면 email 형식만 입력받는다.-->
-        <input name="input_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요">
+        <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요">
       </div>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">내용</label>
         <!--rows는 처음 창의 크기를 결정한다.-->
-        <textarea name="input_content" class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="내용을 입력하세요"></textarea>
+        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="내용을 입력하세요"></textarea>
       </div>
       <!--이미지 파일을 올리기 위한 input tag-->
       <input name="image" type="file" accept="image/*">

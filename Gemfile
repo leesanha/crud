@@ -32,7 +32,13 @@ gem 'kaminari'
 
 gem 'mini_magick'
 
+# sns 로그인
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
+# gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
 
+gem 'figaro'
 
 # gem 'sunspot_rails'
 # gem 'sunspot_solr'

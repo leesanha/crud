@@ -10,23 +10,33 @@ class PostController < ApplicationController
   end
 
   def new
+    @post = Post.new
+  end
+  
+  def post_params
+    params.require(:post).permit(:title, :content, :image)
   end
 
   def create
+    
     # 사진을 저장하는 과정
     uploader = ImageUploader.new
+    
     # new.html의 input에 name이 image임 그거랑 맞춰준다.
     uploader.store!(params[:image])
+    # puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + uploader.url.to_s + 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    # @post = Post.create(title: params[:post][:title], content: params[:post][:content], image: uploader.url, user_id: current_user.id)
     
+    # @post = Post.new(post_params)
     @post = Post.new
-    @post.title = params[:input_title]
-    @post.content = params[:input_content]
-    # 글쓸 때 유저네임을 저장한다.
+    @post.title = params[:title]
+    @post.content = params[:content]
+    # # 글쓸 때 유저네임을 저장한다.
     @post.user_id = current_user.id
-    # 사진의 주소를 저장
+    # # 사진의 주소를 저장
     @post.image = uploader.url
-    @post.thumb = uploader.thumb.url
-    @post.middle = uploader.middle.url
+    # @post.thumb = @uploader.thumb.url
+    # @post.middle = @uploader.middle.url
     @post.save
     # redirect_to 뒤에는 쌍따옴표로 두자
     #밑에 주소 이동을 주석처리하고 실행시키면, create.html파일이 뜨는데, 주소를 보면 params값이 날라오는 것을 볼 수 있음.
@@ -34,9 +44,23 @@ class PostController < ApplicationController
   end
 
   def update
+    
+    
+    # new.html의 input에 name이 image임 그거랑 맞춰준다.
+    
+    # puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + uploader.url.to_s + 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    uploader = ImageUploader.new
+    
     @post = Post.find(params[:id])
-    @post.title = params[:input_title]
-    @post.content = params[:input_content]
+    # @post.update(params[:post].permit(:title, :content, :image))
+    @post.title = params[:title]
+    @post.content = params[:content]
+    
+    uploader.store!(params[:image])
+    # @post.image.cache!
+    @post.image = uploader.url
+    # @post.thumb = uploader.thumb.url
+    # @post.middle = uploader.middle.url
     @post.save
     
     redirect_to  "/post/show/#{params[:id]}"

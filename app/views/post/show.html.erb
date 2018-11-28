@@ -18,29 +18,30 @@
         
         <!--size 말고 count라 써도됨-->
         <div><%= @post.liked_users.size%>명이 좋아합니다.</div>
-        <% if current_user.is_like?(@post) %>
-            <div>
-                <!--<a href="/likes/likes_toggle/<%#= @post.id %>"><span> 좋아요 취소 </span></a>-->
-                <%= link_to "좋아요 취소", likes_likes_toggle_path(@post), method: "post" %>
-            </div>
-        <% else %>
-            <div>
-                <!--<a href="/likes/likes_toggle/<%#= @post.id %>"><span> 좋아요 </span></a>-->
-                <%= link_to "좋아요", likes_likes_toggle_path(@post), :method => "post" %>
-            </div>
-        <% end %>
-    </div>
+          <% if current_user.is_like?(@post) %>
+              <div>
+                  <!--<a href="/likes/likes_toggle/<%#= @post.id %>"><span> 좋아요 취소 </span></a>-->
+                  <%= link_to "좋아요 취소", knu_path(@post), method: "post" %>
+              </div>
+          <% else %>
+              <div>
+                  <!--<a href="/likes/likes_toggle/<%#= @post.id %>"><span> 좋아요 </span></a>-->
+                  <%= link_to "좋아요", knu_path(@post), :method => "post" %>
+              </div>
+          <% end %>
+        </div>
     <!--엔터를 인식시키는 함수-->
     <p><%= simple_format(@post.content) %></p>
     
     <!--사진을 가져오는 태그를 사용하자. 앞에 image_tag를 적고, 뒤에 image파일의 주소를 주는 것.-->
     
     <!--이미지 파일이 nil이 아니면 이미지 파일을 띄워준다.-->
-    <% unless @post.image.nil? %>
+    <%# unless @post.image.nil? %>
         <%= image_tag @post.image %>
         <%#= image_tag @post.thumb %>
         <%#= image_tag @post.middle %>
-    <% end %>
+    <%# end %>
+    
     <hr />
     <!--하나의 post에 달려 있는 reply들을 다 가져 온다.-->
     <div>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'register/info'
+
+  get 'home/index'
+
   devise_for :users
   get 'video_board/index'
 
@@ -26,7 +30,7 @@ Rails.application.routes.draw do
   get 'reply/destroy'
   get 'reply/destroy/:id' => 'reply#destroy'
 
-  root 'post#index'
+  
   get 'post/index'
   get 'post/index/:page' => 'post#index'
 
@@ -52,7 +56,7 @@ Rails.application.routes.draw do
   get 'post/search'
   
   get 'likes/likes_toggle/:id' => 'likes#likes_toggle'
-  post 'likes/likes_toggle'
+  post 'likes/likes_toggle:id', to: 'likes#likes_toggle', as: 'knu'
   
   get 'post/ajaxCall' => 'post#ajaxCall'
   # post 'likes/likes_toggle'
